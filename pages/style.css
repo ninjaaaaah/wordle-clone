@@ -1,0 +1,119 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    min-height: 100vh;
+    padding: 0 0.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: whitesmoke;
+}
+
+.board {
+    height: calc(5rem * 6);
+    width: calc(5rem * 5);
+    border-radius: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+}
+
+.row {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    padding: 0.2rem 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.tile {
+    /* border-radius: 0.2rem; */
+    margin: 0.2rem;
+    height: 100%;
+    flex: 1;
+    border: 0.15rem solid lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 2em;
+    text-transform: uppercase;
+}
+
+.tile#active {
+    border-color: gray;
+    animation: ease grow 0.5s;
+}
+
+.tile#green {
+    color: white;
+    background-color: #6aaa64;
+    border-color: #6aaa64;
+}
+
+.tile#yellow {
+    color: white;
+    background-color: #c9b458;
+    border-color: #c9b458;
+}
+
+.tile#gray {
+    color: white;
+    background-color: #787c7e;
+    border-color: #787c7e;
+}
+
+.keyboard {
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    outline: none;
+}
+
+.key {
+    border-radius: 0.3rem;
+    font-size: 1em;
+    font-weight: 500;
+    margin: 0.3rem;
+    padding: 1.2rem 1rem;
+    background-color: #d3d6da;
+    border: 0.2rem solid #d3d6da;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+@keyframes grow {
+    0% {
+        transform: scale(0.9);
+    }
+    5% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.key#active {
+    animation: ease grow 0.5s;
+}
+
+.input {
+    height: 100px;
+    font-weight: bolder;
+    padding: 20px 0;
+    font-size: 2em;
+    text-transform: uppercase;
+}
