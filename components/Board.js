@@ -1,7 +1,10 @@
+import { motion } from 'framer-motion';
+
 function Tile(props) {
     return (
         <div
             className="tile"
+            style={{ '--index': props.index }}
             id={
                 props.activeRow == props.row && props.text.length > props.index
                     ? 'active'
@@ -44,9 +47,18 @@ function Row(props) {
     );
 }
 
-function Board(props) {
+export default function Board(props) {
     return (
-        <div className="board">
+        <motion.div
+            className="board"
+            animate={{ scale: [0, 1.1, 1] }}
+            transition={{
+                duration: 0.3,
+                ease: 'easeOut',
+                times: [0, 0.8, 1],
+            }}
+            initial={{ scale: 0 }}
+        >
             {Array(6)
                 .fill(null)
                 .map((_, index) => (
@@ -59,8 +71,6 @@ function Board(props) {
                         word={props.word}
                     />
                 ))}
-        </div>
+        </motion.div>
     );
 }
-
-export default Board;

@@ -61,18 +61,30 @@ body {
     color: white;
     background-color: #6aaa64;
     border-color: #6aaa64;
+    transition: background-color 0s ease-in calc(var(--index) * 0.5s + 0.25s),
+        border-color 0s ease-in calc(var(--index) * 0.5s + 0.25s),
+        color 0s ease-in calc(var(--index) * 0.5s + 0.25s);
+    animation: ease flip 0.5s calc(var(--index) * 0.5s);
 }
 
 .tile#yellow {
     color: white;
     background-color: #c9b458;
     border-color: #c9b458;
+    transition: background-color 0s ease-in calc(var(--index) * 0.5s + 0.25s),
+        border-color 0s ease-in calc(var(--index) * 0.5s + 0.25s),
+        color 0s ease-in calc(var(--index) * 0.5s + 0.25s);
+    animation: ease flip 0.5s calc(var(--index) * 0.5s);
 }
 
 .tile#gray {
     color: white;
     background-color: #787c7e;
     border-color: #787c7e;
+    transition: background-color 0s ease-in calc(var(--index) * 0.5s + 0.25s),
+        border-color 0s ease-in calc(var(--index) * 0.5s + 0.25s),
+        color 0s ease-in calc(var(--index) * 0.5s + 0.25s);
+    animation: ease flip 0.5s calc(var(--index) * 0.5s);
 }
 
 .keyboard {
@@ -92,6 +104,18 @@ body {
     border: 0.2rem solid #d3d6da;
     text-transform: uppercase;
     cursor: pointer;
+}
+
+@keyframes flip {
+    0% {
+        transform: rotateX(0deg);
+    }
+    50% {
+        transform: rotateX(90deg);
+    }
+    0% {
+        transform: rotateX(0deg);
+    }
 }
 
 @keyframes grow {
@@ -116,4 +140,48 @@ body {
     padding: 20px 0;
     font-size: 2em;
     text-transform: uppercase;
+}
+
+.endscreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.end {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 5rem;
+    background-color: whitesmoke;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.25);
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.reset {
+    background-color: #6aaa64;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: white;
+    border-radius: 0.3rem;
+    border: none;
+    padding: 1rem 2rem;
+    cursor: pointer;
+}
+
+.code {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    font-weight: bold;
 }

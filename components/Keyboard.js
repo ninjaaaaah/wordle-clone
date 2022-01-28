@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import Board from './Board';
-const dictionary = require('../dictionary.json');
 
 const first = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'];
 const second = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'];
 const third = ['ENTER', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '⌫'];
-const tries = ['', '', '', '', '', ''];
 
 function Tile(props) {
     return (
         <motion.div
             className="key"
-            id={props.activeKey === props.text ? 'active' : ''}
+            id={
+                props.activeKey.toLowerCase() === props.code.toLowerCase()
+                    ? 'active'
+                    : ''
+            }
         >
             {props.text}
         </motion.div>
@@ -25,6 +25,7 @@ function Row(props) {
             {props.row === 0
                 ? first.map((letter) => (
                       <Tile
+                          code={letter}
                           text={letter}
                           key={letter}
                           activeKey={props.activeKey}
@@ -33,6 +34,7 @@ function Row(props) {
                 : props.row === 1
                 ? second.map((letter) => (
                       <Tile
+                          code={letter}
                           text={letter}
                           key={letter}
                           activeKey={props.activeKey}
@@ -40,6 +42,7 @@ function Row(props) {
                   ))
                 : third.map((letter) => (
                       <Tile
+                          code={letter != '⌫' ? letter : 'Backspace'}
                           text={letter}
                           key={letter}
                           activeKey={props.activeKey}
@@ -49,68 +52,18 @@ function Row(props) {
     );
 }
 
-var word = '';
-
-function Keyboard() {
-    const [activeKey, setActiveKey] = useState('');
-    const [text, setText] = useState('');
-    const [activeRow, setActiveRow] = useState(0);
-    const [game, setGame] = useState(0);
-
-    useEffect(() => {
-        word =
-            Object.keys(dictionary)[
-                Math.floor(Math.random() * Object.keys(dictionary).length)
-            ];
-        console.log(word);
-    }, []);
-
-    const isAlpha = (ch) => {
-        return /^[A-Z]$/i.test(ch) | (ch === '');
-    };
-
-    const validate = () => {
-        text.length === 5
-            ? ((tries[activeRow] = text),
-              text === word
-                  ? (setActiveRow(activeRow + 1), setGame(1))
-                  : setActiveRow(activeRow + 1),
-              setText(''))
-            : {};
-    };
-
-    const handler = (event) => {
-        !game
-            ? (isAlpha(event.key) && text.length < 5
-                  ? (setActiveKey(event.key), setText(text + event.key))
-                  : {},
-              event.keyCode === 8 ? setText(text.slice(0, -1)) : {},
-              event.keyCode === 13 ? validate() : {})
-            : {};
-    };
-
-    const reset = () => {
-        setActiveKey('');
-    };
-
+function Keyboard(props) {
     return (
         <>
-            <Board
-                activeRow={activeRow}
-                text={text}
-                tries={tries}
-                word={word}
-            />
-            <div
-                className="keyboard"
-                tabIndex="0"
-                onKeyDown={(e) => handler(e)}
-                onKeyUp={reset}
-            >
+            <div className="keyboard">
                 {Array(3)
                     .fill(null)
                     .map((_, index) => (
-                        <Row key={index} row={index} activeKey={activeKey} />
+                        <Row
+                            key={index}
+                            row={index}
+                            activeKey={props.activeKey}
+                        />
                     ))}
             </div>
         </>
